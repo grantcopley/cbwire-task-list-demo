@@ -1,0 +1,5 @@
+{
+  "includes/css/app.js": "/includes/css/app.js",
+  "includes/js/app.js": "/includes/js/app.js",
+  "includes/js/runtime.js": "/includes/js/runtime.js"
+}
