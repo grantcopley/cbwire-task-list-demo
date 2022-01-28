@@ -1,6 +1,7 @@
 <cfoutput>
 <div class="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
 	<div
+        x-data="{ showTasks: true }"
         class="bg-white rounded shadow p-6 m-4 w-full lg:max-w-3xl">
         <div class="mb-4">
             <div class="flex justify-between">
@@ -17,7 +18,7 @@
             <div class="flex mt-4">
                 <!--- MODEL DATA BINDING --->
                 <input
-                    wire:model.debounce.300ms="task"
+                    wire:model.debounce.50ms="task"
                     class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker" placeholder="Add Task">
                 <!--- ADDTASK ACTION --->
                 <button
@@ -32,17 +33,26 @@
             </div>
         </div>
         <div>
+            <!---
+                Sprinkle some Alpine.js in.
+                <div>
+                    <a href="" @click.prevent="showTasks = !showTasks">Toggle Tasks</a>
+                </div>
+            --->
+
             <!--- #serializeJson( args.tasks )# --->
+
             <cfif arrayLen( args.tasks )>
                 <div>
-                    <a class="text-sm italic text-cyan-500" href="##" wire:click="removeAll">Remove All</a>
+                    <a class="text-sm italic text-cyan-500" href="" wire:click.prevent="removeAll">Remove All</a>
+                    | <a class="text-sm italic text-cyan-500" href="" x-on:click.prevent="showTasks = !showTasks">Toggle Tasks</a>
+                </div>
+                <div x-show="showTasks">
+                    <cfloop array="#args.tasks#" index="task">
+                        #wire( "Task", { "task": task } )#
+                    </cfloop>
                 </div>
             </cfif>
-            <div>
-                <cfloop array="#args.tasks#" index="task">
-                    #wire( "Task", { "task": task } )#
-                </cfloop>
-            </div>
         </div>
     </div>
 </div>
