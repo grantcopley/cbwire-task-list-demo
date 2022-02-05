@@ -8,7 +8,7 @@ Using [CommandBox](https://www.ortussolutions.com/products/commandbox), running 
 
 ```bash
 box install
-server start
+box server start
 ```
 
 Enjoy the beautiful reactivity! - Grant
