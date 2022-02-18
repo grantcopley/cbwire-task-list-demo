@@ -11,20 +11,20 @@
                 </div>
                 <!--- COMPUTED PROPERTIES --->
                 <div>
-                    <div>#args.taskCounter()# tasks</div>
-                    <div>#args.completeCounter()# complete</div>   
+                    <div>#args.taskCounter# tasks</div>
+                    <div>#args.completeCounter# complete</div>   
                 </div>
             </div>
             <div class="flex mt-4">
                 <!--- MODEL DATA BINDING --->
                 <input
-                    wire:model.debounce.50ms="task"
+                    wire:model.debounce.150ms="task"
                     class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker" placeholder="Add Task">
                 <!--- ADDTASK ACTION --->
                 <button
-                    <cfif args.preventAdd()>disabled</cfif>
+                    <cfif args.preventAdd>disabled</cfif>
                     wire:click="addTask"
-                    class="<cfif args.preventAdd()>bg-gray-500<cfelse>bg-cyan-500 hover:bg-cyan-600</cfif> px-2.5 py-1.5 border border-transparent font-medium text-cs shadow-sm rounded text-white hover:text-white">Add</button>
+                    class="<cfif args.preventAdd>bg-gray-500<cfelse>bg-cyan-500 hover:bg-cyan-600</cfif> px-2.5 py-1.5 border border-transparent font-medium text-cs shadow-sm rounded text-white hover:text-white">Add</button>
             </div>
             <div class="text-sm italic text-rose-600">
                 <cfif len( args.error )>
@@ -33,13 +33,6 @@
             </div>
         </div>
         <div>
-            <!---
-                Sprinkle some Alpine.js in.
-                <div>
-                    <a href="" @click.prevent="showTasks = !showTasks">Toggle Tasks</a>
-                </div>
-            --->
-
             <!--- #serializeJson( args.tasks )# --->
 
             <cfif arrayLen( args.tasks )>

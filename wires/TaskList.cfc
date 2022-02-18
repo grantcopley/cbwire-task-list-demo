@@ -32,7 +32,7 @@ component extends="cbwire.models.Component" {
 
     // Validations for our TaskList
     function validate(){
-        this.setError( len( variables.data.task ) ? "" : "Please enter something." );
+        this.setError( len( variables.data.task ) ? "" : "Please enter something else." );
     }
 
     // Runs once when our TaskList is first rendered.
