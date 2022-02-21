@@ -1,38 +1,38 @@
 component extends="cbwire.models.Component" {
 
-    // Reactive data properties
-    variables.data = {
+    // Data Properties
+    data = {
         "tasks": [],
         "task": "",
         "error": ""
     };
 
-    // Listen for events emitted using this.emit()
-    variables.listeners = {
+    // Event Listeners
+    listeners = {
         "removeTask": "removeTask",
         "completeTask": "completeTask",
         "reopenTask": "reopenTask"
     };
 
-    // Computed properties
-    variables.computed = {
+    // Computed Properties
+    computed = {
         "taskCounter": function() {
-            return arrayLen( variables.data.tasks );
+            return arrayLen( data.tasks );
         },
         "completeCounter": function() {
-            var completedTasks = variables.data.tasks.filter( function( task ){
+            var completedTasks = data.tasks.filter( function( task ){
                 return task.complete == true;
             } );
             return arrayLen( completedTasks );
         },
         "preventAdd": function(){
-            return len( variables.data.error ) || !len( variables.data.task );
+            return len( data.error ) || !len( data.task );
         }
     }
 
     // Validations for our TaskList
     function validate(){
-        this.setError( len( variables.data.task ) ? "" : "Please enter something else." );
+        this.setError( len( data.task ) ? "" : "Please enter something else." );
     }
 
     // Runs once when our TaskList is first rendered.
@@ -49,22 +49,22 @@ component extends="cbwire.models.Component" {
     function addTask() {
         validate();
 
-        if ( len( variables.data.error ) ){
+        if ( len( data.error ) ){
             return;
         }
 
-        variables.data.tasks.append( {
+        data.tasks.append( {
             "id": createUUID(),
-            "name": variables.data.task,
+            "name": data.task,
             "complete": false
         } );
 
-        variables.data.task = "";
+        data.task = "";
     }
 
     // Remove a task
     function removeTask( taskId ) {
-        variables.data.tasks = variables.data.tasks.filter( function( checkTask ) {
+        data.tasks = data.tasks.filter( function( checkTask ) {
             return checkTask.id != taskId;
         } );
     }
@@ -76,7 +76,7 @@ component extends="cbwire.models.Component" {
 
     // Remove all tasks
     function removeAll() {
-        variables.data.tasks = [];
+        data.tasks = [];
     }
 
     // Reopen a completed task
@@ -86,7 +86,7 @@ component extends="cbwire.models.Component" {
 
     // Flag is task either completed or not
     function flagTask( taskId, isCompleted ) {
-        var match = variables.data.tasks.filter( function( checkTask ) {
+        var match = data.tasks.filter( function( checkTask ) {
             return checkTask.id == taskId;
         } );
 
