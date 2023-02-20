@@ -137,7 +137,11 @@ component {
 		 *
 		 * }
 		 */
-		moduleSettings = {};
+		moduleSettings = {
+			"cbwire": {
+				"useComputedPropertiesProxy": true
+			}
+		};
 
 		/**
 		 * --------------------------------------------------------------------------

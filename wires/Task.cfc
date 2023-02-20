@@ -9,15 +9,15 @@ component extends="cbwire.models.Component" {
     }
 
     function remove() {
-        this.emit( "removeTask", { "taskId": data.task.id  });
+        this.emit( "removeTask", [ data.task.id ] );
     }
 
     function complete() {
-        this.emit( "completeTask", { "taskId": data.task.id  } );
+        this.emit( "completeTask", [ data.task.id ] );
     }
 
     function reopen(){
-        this.emit( "reopenTask", { "taskId": data.task.id  } );
+        this.emit( "reopenTask", [ data.task.id ] );
     }
 
 }

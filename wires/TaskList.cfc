@@ -16,6 +16,9 @@ component extends="cbwire.models.Component" {
 
     // Computed Properties
     computed = {
+        "error": function() {
+            return data.task.len() ? "" : "Please enter a task.";
+        },
         "taskCounter": function() {
             return arrayLen( data.tasks );
         },
@@ -32,7 +35,7 @@ component extends="cbwire.models.Component" {
 
     // Validations for our TaskList
     function validate(){
-        this.setError( len( data.task ) ? "" : "Please enter something else." );
+        data.error = len( data.task ) ? "" : "Please enter something else.";
     }
 
     // Runs once when our TaskList is first rendered.
@@ -49,9 +52,6 @@ component extends="cbwire.models.Component" {
     function addTask() {
         validate();
 
-        if ( len( data.error ) ){
-            return;
-        }
 
         data.tasks.append( {
             "id": createUUID(),
